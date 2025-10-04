@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brightrose Tech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #5A52D5;
+            --secondary: #FF6584;
+            --dark: #2A2D43;
+            --light: #F7F9FC;
+            --gray: #8C8EA4;
+            --success: #4CAF50;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 15px;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            margin-right: 15px;
+        }
+
+        .profile-info h2 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation Styles */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+            z-index: 100;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--gray);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        /* Content Area */
+        .content {
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title span {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Hot Courses */
+        .hot-courses {
+            margin-bottom: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 15px;
+            transition: var(--transition);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .course-header {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .course-badge {
+            background: var(--secondary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 15px;
+        }
+
+        .course-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-enroll {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .btn-live {
+            background: var(--secondary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Video Section */
+        .video-section {
+            margin-bottom: 25px;
+        }
+
+        .video-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 15px;
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(45deg, #6C63FF, #FF6584);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .video-desc {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Image Carousel */
+        .image-carousel {
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Courses Page */
+        .courses-page, .community-page, .profile-page {
+            display: none;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .course-item {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .course-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .course-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .course-price {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .course-details {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .course-detail {
+            margin-right: 15px;
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .course-detail i {
+            margin-right: 5px;
+        }
+
+        .course-status {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .course-action {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-learn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-learn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Community Page */
+        .post-form {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+        }
+
+        .post-input {
+            width: 100%;
+            border: none;
+            resize: none;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            min-height: 60px;
+            outline: none;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .media-options {
+            display: flex;
+        }
+
+        .media-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            color: var(--gray);
+            margin-right: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .media-option:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-post {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-post:hover {
+            background: var(--primary-dark);
+        }
+
+        .feed {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .post {
+            background: white;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .post-user {
+            font-weight: 600;
+        }
+
+        .post-time {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .post-content {
+            margin-bottom: 10px;
+        }
+
+        .post-image, .post-video {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .post-engagement {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 10px;
+        }
+
+        .engagement-btn {
+            display: flex;
+            align-items: center;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .engagement-btn:hover {
+            color: var(--primary);
+        }
+
+        .engagement-btn i {
+            margin-right: 5px;
+        }
+
+        /* Profile Page */
+        .profile-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: var(--card-shadow);
+            margin: 0 auto 15px;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .settings-list {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .setting-item {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item:hover {
+            background: var(--light);
+        }
+
+        .setting-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-title {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .setting-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .setting-arrow {
+            color: var(--gray);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .app-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Brightrose Tech</h1>
+            <div class="profile-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Profile" class="profile-img">
+                <div class="profile-info">
+                    <h2>Nmegwa Denis Bright</h2>
+                    <p>Founder and Tutor</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Home Page (Default) -->
+            <div class="home-page">
+                <!-- Hot Courses -->
+                <div class="hot-courses">
+                    <h2 class="section-title">Hot Courses <span>View All</span></h2>
+                    
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-title">Digital Sales</div>
+                            <div class="course-badge">HOT</div>
+                        </div>
+                        <div class="course-content">
+                            <p>Master the art of digital sales with our comprehensive course designed for modern professionals.</p>
+                            <div class="course-actions">
+                                <button class="btn btn-enroll">Enroll Now</button>
+                                <button class="btn btn-live">Live Session</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-title">Starter Bootcamp</div>
+                            <div class="course-badge">NEW</div>
+                        </div>
+                        <div class="course-content">
+                            <p>Kickstart your tech career with our intensive bootcamp covering essential skills.</p>
+                            <div class="course-actions">
+                                <button class="btn btn-enroll">Enroll Now</button>
+                                <button class="btn btn-live">Live Session</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-title">Virtual Assistance</div>
+                            <div class="course-badge">POPULAR</div>
+                        </div>
+                        <div class="course-content">
+                            <p>Learn how to become a successful virtual assistant with our specialized training program.</p>
+                            <div class="course-actions">
+                                <button class="btn btn-enroll">Enroll Now</button>
+                                <button class="btn btn-live">Live Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Lesson -->
+                <div class="video-section">
+                    <h2 class="section-title">Today's Lesson</h2>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Introduction to Digital Marketing</div>
+                            <div class="video-desc">Learn the fundamentals of digital marketing in this comprehensive lesson.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hot Lessons -->
+                <div class="video-section">
+                    <h2 class="section-title">Hot Lessons</h2>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #FF6584, #6C63FF);">
+                            <div class="play-btn">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Advanced Sales Techniques</div>
+                            <div class="video-desc">Master advanced strategies to boost your sales performance.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="image-carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80');"></div>
+                    </div>
+                    <div class="carousel-nav">
+                        <div class="carousel-dot active"></div>
+                        <div class="carousel-dot"></div>
+                        <div class="carousel-dot"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses Page -->
+            <div class="courses-page">
+                <h2 class="section-title">Available Courses</h2>
+                
+                <div class="course-list">
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Starter Bootcamp</div>
+                            <div class="course-price">FREE</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 1 Week</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Remote Work Mastery</div>
+                            <div class="course-price">$49</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 2 Weeks</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Digital Sales</div>
+                            <div class="course-price">$69</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 2 Weeks</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Tech Support (M365)</div>
+                            <div class="course-price">$99</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 4 Weeks</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile + PC</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Intro to AI & Prompting</div>
+                            <div class="course-price">$39</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 1 Week</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-item">
+                        <div class="course-item-header">
+                            <div class="course-name">Virtual Assistance</div>
+                            <div class="course-price">$79</div>
+                        </div>
+                        <div class="course-details">
+                            <div class="course-detail"><i class="far fa-clock"></i> 2 Weeks</div>
+                            <div class="course-detail"><i class="fas fa-mobile-alt"></i> Mobile</div>
+                        </div>
+                        <div class="course-status">This course will launch shortly.</div>
+                        <div class="course-action">
+                            <button class="btn-learn">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-choose" style="margin-top: 30px; text-align: center; padding: 20px; background: white; border-radius: 16px; box-shadow: var(--card-shadow);">
+                    <h2 style="margin-bottom: 15px;">Why Choose Brightrose Tech?</h2>
+                    <p style="margin-bottom: 20px; color: var(--gray);">We provide industry-leading courses with practical skills and expert guidance to help you succeed in the digital world.</p>
+                    <button class="btn btn-enroll" style="width: 100%;">Enroll Now</button>
+                </div>
+            </div>
+
+            <!-- Community Page -->
+            <div class="community-page">
+                <h2 class="section-title">Community</h2>
+                
+                <div class="post-form">
+                    <textarea class="post-input" placeholder="Share something with the community..."></textarea>
+                    <div class="post-actions">
+                        <div class="media-options">
+                            <div class="media-option">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div class="media-option">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <div class="media-option">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                        </div>
+                        <button class="btn-post">Post</button>
+                    </div>
+                </div>
+                
+                <div class="feed">
+                    <div class="post">
+                        <div class="post-header">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="User" class="post-avatar">
+                            <div>
+                                <div class="post-user">Sarah Johnson</div>
+                                <div class="post-time">2 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Just completed the Digital Sales course! The content was incredibly valuable and practical. Highly recommend!
+                        </div>
+                        <div class="post-engagement">
+                            <div class="engagement-btn"><i class="far fa-heart"></i> 24</div>
+                            <div class="engagement-btn"><i class="far fa-comment"></i> 8</div>
+                            <div class="engagement-btn"><i class="far fa-share-square"></i> Share</div>
+                        </div>
+                    </div>
+                    
+                    <div class="post">
+                        <div class="post-header">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="User" class="post-avatar">
+                            <div>
+                                <div class="post-user">Michael Chen</div>
+                                <div class="post-time">5 hours ago</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Anyone else working on the Virtual Assistance course? I'd love to connect and discuss the assignments!
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" class="post-image" alt="Post Image">
+                        <div class="post-engagement">
+                            <div class="engagement-btn"><i class="far fa-heart"></i> 15</div>
+                            <div class="engagement-btn"><i class="far fa-comment"></i> 12</div>
+                            <div class="engagement-btn"><i class="far fa-share-square"></i> Share</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div class="profile-page">
+                <div class="profile-header">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Profile" class="profile-picture">
+                    <div class="profile-name">Alex Morgan</div>
+                    <div class="profile-email">alex.morgan@example.com</div>
+                </div>
+                
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Edit Profile</div>
+                            <div class="setting-desc">Update your personal information</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Notifications</div>
+                            <div class="setting-desc">Manage your notification preferences</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Privacy & Security</div>
+                            <div class="setting-desc">Control your privacy settings</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Help & Support</div>
+                            <div class="setting-desc">Get help and contact support</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Settings</div>
+                            <div class="setting-desc">App and account settings</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <div class="setting-icon">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </div>
+                        <div class="setting-info">
+                            <div class="setting-title">Logout</div>
+                            <div class="setting-desc">Sign out of your account</div>
+                        </div>
+                        <div class="setting-arrow">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-page="home">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item" data-page="courses">
+                <div class="nav-icon"><i class="fas fa-book-open"></i></div>
+                <div class="nav-label">Courses</div>
+            </div>
+            <div class="nav-item" data-page="community">
+                <div class="nav-icon"><i class="fas fa-users"></i></div>
+                <div class="nav-label">Community</div>
+            </div>
+            <div class="nav-item" data-page="profile">
+                <div class="nav-icon"><i class="fas fa-user"></i></div>
+                <div class="nav-label">Me</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const pages = document.querySelectorAll('.home-page, .courses-page, .community-page, .profile-page');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active nav item
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pages.forEach(page => {
+                        page.style.display = 'none';
+                    });
+                    
+                    document.querySelector(`.${targetPage}-page`).style.display = 'block';
+                });
+            });
+            
+            // Image carousel functionality
+            const carouselTrack = document.querySelector('.carousel-track');
+            const carouselDots = document.querySelectorAll('.carousel-dot');
+            let currentSlide = 0;
+            
+            function updateCarousel() {
+                carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                carouselDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % carouselDots.length;
+                updateCarousel();
+            }, 5000);
+            
+            // Dot click functionality
+            carouselDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Button animations
+            const buttons = document.querySelectorAll('.btn, .btn-learn, .btn-post');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
